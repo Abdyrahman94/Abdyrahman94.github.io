@@ -60,6 +60,21 @@
             color: var(--accent);
         }
 
+        .nav-toggle {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 4px;
+        }
+
+        .nav-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--accent);
+            transition: all 0.3s;
+            border-radius: 3px;
+        }
+
         nav ul {
             display: flex;
             list-style: none;
@@ -115,14 +130,17 @@
         }
 
         .hero-content {
-            text-align: center;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            max-width: 900px;
             z-index: 1;
         }
 
         .profile-image {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 2rem;
+            width: 250px;
+            height: 250px;
+            min-width: 250px;
             border-radius: 50%;
             overflow: hidden;
             border: 4px solid var(--accent);
@@ -148,8 +166,12 @@
             object-fit: cover;
         }
 
-        .hero h1 {
-            font-size: 3rem;
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
             margin-bottom: 0.5rem;
             background: linear-gradient(135deg, var(--accent), #00ff88);
             -webkit-background-clip: text;
@@ -158,13 +180,13 @@
         }
 
         .age-location {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             color: var(--text-secondary);
-            margin-bottom: 0.5rem;
+            margin-bottom: 1rem;
         }
 
-        .hero p {
-            font-size: 1.5rem;
+        .hero-text p {
+            font-size: 1.2rem;
             color: var(--text-secondary);
             margin-bottom: 2rem;
         }
@@ -264,15 +286,41 @@
         }
 
         /* Skills Section */
+        .skills-container {
+            display: flex;
+            flex-direction: column;
+            gap: 3rem;
+        }
+
+        .skill-category {
+            background: var(--bg-card);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid var(--border);
+        }
+
+        .category-title {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            color: var(--accent);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .category-title i {
+            font-size: 2rem;
+        }
+
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
         }
 
         .skill-card {
-            background: var(--bg-card);
-            padding: 2rem;
+            background: var(--bg-secondary);
+            padding: 1.5rem;
             border-radius: 15px;
             border: 1px solid var(--border);
             transition: all 0.3s;
@@ -297,20 +345,20 @@
         }
 
         .skill-percentage {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: bold;
             color: var(--accent);
         }
 
         .skill-name {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             margin-bottom: 1rem;
         }
 
         .progress-bar {
             width: 100%;
             height: 8px;
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             border-radius: 10px;
             overflow: hidden;
         }
@@ -476,26 +524,52 @@
 
         /* Mobile Responsive */
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2rem;
+            .nav-toggle {
+                display: flex;
             }
 
-            .hero p {
-                font-size: 1rem;
+            nav ul {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                flex-direction: column;
+                background: rgba(26, 26, 26, 0.98);
+                padding: 2rem;
+                gap: 1.5rem;
+                transition: left 0.3s ease;
+                border-bottom: 1px solid var(--border);
+            }
+
+            nav ul.active {
+                left: 0;
+            }
+
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .hero-text {
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 2rem;
             }
 
             .age-location {
                 font-size: 1rem;
             }
 
-            .profile-image {
-                width: 150px;
-                height: 150px;
+            .hero-text p {
+                font-size: 1rem;
             }
 
-            nav ul {
-                gap: 1rem;
-                font-size: 0.9rem;
+            .profile-image {
+                width: 180px;
+                height: 180px;
+                min-width: 180px;
             }
 
             .about-content {
@@ -503,6 +577,10 @@
             }
 
             .about-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -531,11 +609,16 @@
     <nav>
         <div class="container">
             <div class="logo">&lt;Dev/&gt;</div>
-            <ul>
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#contact">Contact</a></li>
+            <div class="nav-toggle" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="navMenu">
+                <li><a href="#home" onclick="closeMenu()">Home</a></li>
+                <li><a href="#about" onclick="closeMenu()">About</a></li>
+                <li><a href="#skills" onclick="closeMenu()">Skills</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
             </ul>
         </div>
     </nav>
@@ -546,10 +629,12 @@
             <div class="profile-image">
                 <img src="img/signal-2025-11-23-004701_002.jpeg" alt="Profile Picture">
             </div>
-            <h1>John Doe</h1>
-            <p class="age-location">25 Years Old | Full Stack Developer</p>
-            <p>Building modern web applications with passion</p>
-            <a href="#contact" class="cta-button">Get In Touch</a>
+            <div class="hero-text">
+                <h1>John Doe</h1>
+                <p class="age-location">25 Years Old | Full Stack Developer</p>
+                <p>Building modern web applications with passion</p>
+                <a href="#contact" class="cta-button">Get In Touch</a>
+            </div>
         </div>
     </section>
 
@@ -559,30 +644,34 @@
         <div class="about-content">
             <div class="about-text">
                 <p>Hi! I'm a passionate full-stack developer with expertise in building modern, scalable web
-                    applications. I love turning complex problems into simple, beautiful, and intuitive solutions.</p>
-                <p>With a strong foundation in both frontend and backend technologies, I create seamless user
-                    experiences while ensuring robust server-side functionality.</p>
+                    applications. I specialize in creating responsive, user-friendly interfaces and robust backend
+                    systems.</p>
+                <p>I have experience working with multiple programming languages and frameworks, allowing me to choose
+                    the best tools for each project. My focus is on writing clean, maintainable code that solves
+                    real-world problems.</p>
+                <p>Whether it's a dynamic website, a complex web application, or a database-driven system, I bring
+                    creativity and technical expertise to every project I work on.</p>
             </div>
             <div class="about-stats">
                 <div class="stat-card">
                     <i class="bi bi-code-slash"></i>
-                    <h3>8+</h3>
+                    <h3>9+</h3>
                     <p>Technologies Mastered</p>
                 </div>
                 <div class="stat-card">
-                    <i class="bi bi-trophy"></i>
-                    <h3>100%</h3>
-                    <p>Client Satisfaction</p>
+                    <i class="bi bi-journal-code"></i>
+                    <h3>50+</h3>
+                    <p>Projects Completed</p>
                 </div>
                 <div class="stat-card">
-                    <i class="bi bi-laptop"></i>
-                    <h3>Modern</h3>
-                    <p>Tech Stack</p>
+                    <i class="bi bi-clock-history"></i>
+                    <h3>3+</h3>
+                    <p>Years Experience</p>
                 </div>
                 <div class="stat-card">
-                    <i class="bi bi-lightning-charge"></i>
-                    <h3>Fast</h3>
-                    <p>Development</p>
+                    <i class="bi bi-cup-hot"></i>
+                    <h3>1000+</h3>
+                    <p>Cups of Coffee</p>
                 </div>
             </div>
         </div>
@@ -591,106 +680,141 @@
     <!-- Skills Section -->
     <section id="skills">
         <h2>My Skills</h2>
-        <div class="skills-grid">
+        <div class="skills-container">
             <!-- Programming Languages -->
-            <div class="skill-card">
-                <div class="skill-header">
-                    <i class="bi bi-filetype-html"></i>
-                    <span class="skill-percentage">95%</span>
+            <div class="skill-category">
+                <div class="category-title">
+                    <i class="bi bi-code-slash"></i>
+                    Programming Languages
                 </div>
-                <div class="skill-name">HTML</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 95%"></div>
-                </div>
-            </div>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <i class="bi bi-filetype-html"></i>
+                            <span class="skill-percentage">95%</span>
+                        </div>
+                        <div class="skill-name">HTML</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 95%"></div>
+                        </div>
+                    </div>
 
-            <div class="skill-card">
-                <div class="skill-header">
-                    <i class="bi bi-filetype-css"></i>
-                    <span class="skill-percentage">90%</span>
-                </div>
-                <div class="skill-name">CSS</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 90%"></div>
-                </div>
-            </div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <i class="bi bi-filetype-css"></i>
+                            <span class="skill-percentage">79%</span>
+                        </div>
+                        <div class="skill-name">CSS</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 79%"></div>
+                        </div>
+                    </div>
 
-            <div class="skill-card">
-                <div class="skill-header">
-                    <i class="bi bi-filetype-js"></i>
-                    <span class="skill-percentage">85%</span>
-                </div>
-                <div class="skill-name">JavaScript</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 85%"></div>
-                </div>
-            </div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <i class="bi bi-filetype-js"></i>
+                            <span class="skill-percentage">60%</span>
+                        </div>
+                        <div class="skill-name">JavaScript</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%"></div>
+                        </div>
+                    </div>
 
-            <div class="skill-card">
-                <div class="skill-header">
-                    <i class="bi bi-filetype-php"></i>
-                    <span class="skill-percentage">82%</span>
-                </div>
-                <div class="skill-name">PHP</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 82%"></div>
-                </div>
-            </div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <i class="bi bi-filetype-php"></i>
+                            <span class="skill-percentage">70%</span>
+                        </div>
+                        <div class="skill-name">PHP</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 70%"></div>
+                        </div>
+                    </div>
 
-            <div class="skill-card">
-                <div class="skill-header">
-                    <i class="bi bi-filetype-py"></i>
-                    <span class="skill-percentage">75%</span>
-                </div>
-                <div class="skill-name">Python</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 75%"></div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <i class="bi bi-filetype-py"></i>
+                            <span class="skill-percentage">50%</span>
+                        </div>
+                        <div class="skill-name">Python</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 50%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Frameworks & Libraries -->
-            <div class="skill-card">
-                <div class="skill-header">
-                    <i class="bi bi-bootstrap"></i>
-                    <span class="skill-percentage">88%</span>
+            <div class="skill-category">
+                <div class="category-title">
+                    <i class="bi bi-layers"></i>
+                    Frameworks & Libraries
                 </div>
-                <div class="skill-name">Bootstrap</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 88%"></div>
-                </div>
-            </div>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <i class="bi bi-bootstrap"></i>
+                            <span class="skill-percentage">81%</span>
+                        </div>
+                        <div class="skill-name">Bootstrap</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 81%"></div>
+                        </div>
+                    </div>
 
-            <div class="skill-card">
-                <div class="skill-header">
-                    <i class="bi bi-code-square"></i>
-                    <span class="skill-percentage">80%</span>
-                </div>
-                <div class="skill-name">Laravel</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 80%"></div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <i class="bi bi-code-square"></i>
+                            <span class="skill-percentage">80%</span>
+                        </div>
+                        <div class="skill-name">Laravel</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
             <!-- Database & Tools -->
-            <div class="skill-card">
-                <div class="skill-header">
-                    <i class="bi bi-database"></i>
-                    <span class="skill-percentage">85%</span>
+            <div class="skill-category">
+                <div class="category-title">
+                    <i class="bi bi-tools"></i>
+                    Database & Tools
                 </div>
-                <div class="skill-name">MySQL</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 85%"></div>
-                </div>
-            </div>
+                <div class="skills-grid">
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <i class="bi bi-database"></i>
+                            <span class="skill-percentage">77%</span>
+                        </div>
+                        <div class="skill-name">MySQL</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 77%"></div>
+                        </div>
+                    </div>
 
-            <div class="skill-card">
-                <div class="skill-header">
-                    <i class="bi bi-github"></i>
-                    <span class="skill-percentage">88%</span>
-                </div>
-                <div class="skill-name">GitHub</div>
-                <div class="progress-bar">
-                    <div class="progress-fill" style="width: 88%"></div>
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <i class="bi bi-github"></i>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-name">GitHub</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+
+                    <div class="skill-card">
+                        <div class="skill-header">
+                            <i class="bi bi-code-slash"></i>
+                            <span class="skill-percentage">90%</span>
+                        </div>
+                        <div class="skill-name">Visual Studio Code</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -707,22 +831,22 @@
             <div class="contact-form-container">
                 <div class="input-group">
                     <i class="bi bi-person"></i>
-                    <input type="text" id="name" placeholder="Your Name" required>
+                    <input type="text" id="name" placeholder="Your Name">
                 </div>
 
                 <div class="input-group">
                     <i class="bi bi-envelope"></i>
-                    <input type="email" id="email" placeholder="Your Email" required>
+                    <input type="email" id="email" placeholder="Your Email">
                 </div>
 
                 <div class="input-group">
-                    <i class="bi bi-chat-dots"></i>
-                    <input type="text" id="subject" placeholder="Subject" required>
+                    <i class="bi bi-telephone"></i>
+                    <input type="number" id="phone" placeholder="phone">
                 </div>
 
                 <div class="input-group">
                     <i class="bi bi-pencil"></i>
-                    <textarea id="message" rows="5" placeholder="Your Message" required></textarea>
+                    <textarea id="message" rows="5" placeholder="Your Message"></textarea>
                 </div>
 
                 <button class="submit-button">
@@ -736,7 +860,7 @@
             </div>
 
             <div class="contact-links">
-                <a href="emailTo:abdyrahmanrejepow78@gmail.com" class="contact-link">
+                <a href="mailto:your.email@example.com" class="contact-link">
                     <i class="bi bi-envelope"></i>
                     <span>Email</span>
                 </a>
@@ -744,9 +868,13 @@
                     <i class="bi bi-github"></i>
                     <span>GitHub</span>
                 </a>
-                <a href="https://www.instagram.com/@abdyrahman_94_" target="_blank" class="contact-link">
+                <a href="https://linkedin.com/in/abdyrahman-rejepov" target="_blank" class="contact-link">
+                    <i class="bi bi-linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://instagram.com/abdyrahman_94_" target="_blank" class="contact-link">
                     <i class="bi bi-instagram"></i>
-                    <span>instagram</span>
+                    <span>Instagram</span>
                 </a>
             </div>
         </div>
@@ -758,6 +886,17 @@
     </footer>
 
     <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navMenu = document.getElementById('navMenu');
+            navMenu.classList.remove('active');
+        }
+
         // Smooth scroll animation for progress bars
         window.addEventListener('scroll', function () {
             const skillsSection = document.getElementById('skills');
@@ -784,22 +923,7 @@
         // Contact form submission
         document.querySelector('.submit-button').addEventListener('click', function (e) {
             e.preventDefault();
-
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-
-            if (name && email && subject && message) {
-                alert('Thank you for your message! I will get back to you soon.');
-                // Clear form
-                document.getElementById('name').value = '';
-                document.getElementById('email').value = '';
-                document.getElementById('subject').value = '';
-                document.getElementById('message').value = '';
-            } else {
-                alert('Please fill in all fields.');
-            }
+            // Form is for display only - no action taken
         });
     </script>
 </body>
